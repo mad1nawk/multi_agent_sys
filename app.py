@@ -14,7 +14,7 @@ async def on_chat_start():
     cl.user_session.set("thread_id", thread_id)
     logger.info(f"New chat session started: {thread_id}")
     await cl.Message(
-        content="**Socrates Study Assistant** is ready!\nAsk me a math problem, theoretical concept, or self-test quiz (in English)."
+        content="**Assistant** is ready!\nAsk me a math problem, theoretical concept, or self-test quiz."
     ).send()
 
 
@@ -23,7 +23,7 @@ async def on_message(message: cl.Message):
     thread_id = cl.user_session.get("thread_id")
     config = {"configurable": {"thread_id": thread_id}, "recursion_limit": 12}
 
-    msg = cl.Message(content="⏳ *Routing, solving, and verifying...*")
+    msg = cl.Message(content="*Routing, solving, and verifying...*")
     await msg.send()
 
     t0 = time.perf_counter()
