@@ -7,20 +7,15 @@ DATA_DIR = Path("workspace/data")
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 
 
+# Returns a LangGraph checkpointer for short-term memory
 def get_short_term_checkpointer() -> SqliteSaver:
-    """
-    Возвращает чекпоинтер LangGraph для краткосрочной памяти (сессии по thread_id).
-    """
     db_path = DATA_DIR / "checkpoints.sqlite"
     conn = sqlite3.connect(str(db_path), check_same_thread=False)
     return SqliteSaver(conn)
 
 
+# Initializes local Mem0 using Ollama and a local Qdrant
 def get_long_term_memory() -> Memory:
-    """
-    Инициализирует локальный Mem0 с использованием Ollama (Qwen 3.5 4B + nomic-embed-text)
-    и локального Qdrant без внешних облачных API.
-    """
     config = {
         "llm": {
             "provider": "ollama",
