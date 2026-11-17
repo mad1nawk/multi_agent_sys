@@ -24,7 +24,6 @@ def _is_port_open(host: str, port: int) -> bool:
 
 
 def init_tracing(project_name: str = "socrates-study-assistant"):
-    """Подключает трассировку только если сервер Phoenix запущен на порту 6006."""
     if not _is_port_open("localhost", 6006):
         logger.info("Arize Phoenix server is not running on port 6006; tracing skipped.")
         return
@@ -41,7 +40,6 @@ def init_tracing(project_name: str = "socrates-study-assistant"):
 
 
 def trigger_alert(alert_type: str, details: str):
-    """Программный алертинг при критических событиях."""
     alert_msg = f"[ALERT: {alert_type}] {details}"
-    print(f"\n🚨 {alert_msg}\n")
+    print(f"\n {alert_msg}\n")
     logger.error(alert_msg)
